@@ -16,6 +16,15 @@ export async function getBook(id: string) {
 }
 
 export async function authUserLogin(formData: { email: string, password: string }) {
-    const response = await api.post('http://localhost:3000/auth', { email: formData.email, password: formData.password })
+    const response = await axios.post('http://localhost:3000/auth', { email: formData.email, password: formData.password })
+    return await response.data;
+}
+
+export async function registerUser(formData: { full_name: string, email: string, password: string, confirm_password: string }) {
+    const response = await axios.post('http://localhost:3000/users', { full_name: formData.full_name, email: formData.email, password: formData.password, confirm_password: formData.confirm_password }, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
     return await response.data;
 }
